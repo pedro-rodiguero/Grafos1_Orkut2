@@ -10,11 +10,14 @@ class Solution:
             if not cache[i][j]:
                 val = matrix[i][j]
                 cache[i][j] = 1 + max(
-                    dfs(i + di, j + dj)
-                    for di, dj in directions
-                    if 0 <= i + di < m
-                    and 0 <= j + dj < n
-                    and matrix[i + di][j + dj] > val
+                    (
+                        dfs(i + di, j + dj)
+                        for di, dj in directions
+                        if 0 <= i + di < m
+                        and 0 <= j + dj < n
+                        and matrix[i + di][j + dj] > val
+                    ),
+                    default=0,
                 )
             return cache[i][j]
 
