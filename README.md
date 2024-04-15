@@ -44,12 +44,9 @@ Adicione 3 ou mais screenshots do projeto em funcionamento.
 ### Passos para a instalação
 
 1. Clone o repositório
-2. Entre no diretório do projeto<br>
-   `cd folder`<br>
-3. Entre no virtual environment
-   `python3 -m venv venv`
-4. Instale as dependências<br>
-   `pip install frameworks`<br>
+2. Entre no diretório do projeto: `cd folder`<br>
+3. Entre no virtual environment: `python3 -m venv venv`<br>
+4. Instale as dependências: `pip install frameworks`<br>
 
 ## Uso 
 Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.

@@ -1,50 +1,52 @@
+import json
 import networkx as nx
+import matplotlib.pyplot as plt
 
 
 class User:
-    def __init__(self, name, university, football_team):
-        self.name = name
-        self.university = university
-        self.football_team = football_team
+    def __init__(self, course, registration, email):
+        self.course = course
+        self.registration = int(registration)
+        self.email = email
 
 
-class Orkut2:
-    def __init__(self):
-        self.graph = nx.Graph()
+# Lê o arquivo JSON
+with open("new_list.json", "r") as file:
+    friends = json.load(file)
 
-    def add_user(self, user):
-        self.graph.add_node(user)
+# Cria um objeto User para cada amigo na lista
+users = [User(**friend) for friend in friends]
 
-    def add_friend(self, user1, user2):
-        self.graph.add_edge(user1, user2)
+# Cria um grafo
+G = nx.Graph()
 
-    def recommend_friends(self, user):
-        recommendations = []
-        for potential_friend in self.graph.nodes:
-            if potential_friend != user and not self.graph.has_edge(
-                user, potential_friend
-            ):
-                common_friends = len(
-                    list(nx.common_neighbors(self.graph, user, potential_friend))
-                )
-                if (
-                    common_friends > 0
-                    or user.university == potential_friend.university
-                    or user.football_team == potential_friend.football_team
-                ):
-                    recommendations.append(potential_friend)
-        return recommendations
+# Adiciona cada usuário ao grafo
+for user in users:
+    G.add_node(user)
 
-    def view_friends_network(self, user):
-        return list(self.graph.neighbors(user))
+# Cria uma aresta entre cada par de usuários cuja diferença de "registration" seja a menor possível
+for i in range(len(users)):
+    for j in range(i + 1, len(users)):
+        G.add_edge(
+            users[i],
+            users[j],
+            weight=abs(users[i].registration - users[j].registration),
+        )
 
-    def update_profile(self, user, name=None, university=None, football_team=None):
-        if name:
-            user.name = name
-        if university:
-            user.university = university
-        if football_team:
-            user.football_team = football_team
+# Ordena os usuários por "registration" em ordem decrescente
+users.sort(key=lambda x: x.registration, reverse=True)
 
-    def view_friendship_path(self, user1, user2):
-        return nx.shortest_path(self.graph, user1, user2)
+# Desenha o grafo
+pos = nx.spring_layout(G)  # positions for all nodes
+
+# nodes
+nx.draw_networkx_nodes(G, pos, node_size=700)
+
+# edges
+nx.draw_networkx_edges(G, pos, width=6)
+
+# labels
+nx.draw_networkx_labels(G, pos, font_size=20, font_family="sans-serif")
+
+plt.axis("off")
+plt.show()
