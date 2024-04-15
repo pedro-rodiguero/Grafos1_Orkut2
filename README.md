@@ -33,9 +33,23 @@ O objetivo do Orkut2 é facilitar a formação de novas conexões e amizades atr
 Adicione 3 ou mais screenshots do projeto em funcionamento.
 
 ## Instalação 
-**Linguagem**: xxxxxx<br>
-**Framework**: (caso exista)<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
+**Linguagem**: Python<br>
+**Bibliotecas**: NetworkX<br>
+
+### Pré-requisitos
+
+- Ter o Python instalado (versão 3.6 ou superior)
+- Ter o pip instalado (geralmente já vem com a instalação do Python)
+
+### Passos para a instalação
+
+1. Clone o repositório
+2. Entre no diretório do projeto
+   `cd folder`
+3. Entre no virtual environment
+   `python3 -m venv venv
+4. Instale as dependências
+   `pip install frameworks`
 
 ## Uso 
 Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
